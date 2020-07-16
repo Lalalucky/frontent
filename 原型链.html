@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>原型链</title>
+	</head>
+	<body></body>
+</html>
+<script>
+	function Foo(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+	Foo.prototype.toString = function() {
+		return `${this.x}${this.y}`;
+	};
+
+	let f1 = new Foo();
+	f1.constructor; // Foo
+	Foo.prototype;  // 
+	Foo.prototype.constructor == Foo; // true
+	f1.__proto__; // Foo.prototype
+
+	debugger;
+</script>
