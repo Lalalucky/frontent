@@ -1,12 +1,17 @@
-let http = require('http');
-let fs = require('fs');
-let path = require('path');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 const common = require('./module/common.js');
+const url = require('url');
+
+common.getFileMime('.html');
+
 http
 	.createServer(function(req, rep) {
+		debugger;
 		// http:localhost:8081/index.html
 		// 1. 获取地址
-		let pathname = req.url;
+		let pathname = url.parse(req.url).pathname;
 		pathname = pathname == '/' ? '/index.html' : pathname;
 		// 获取后缀名
 		let extname = path.extname(pathname);
