@@ -4,7 +4,7 @@ const path = require('path');
 const common = require('./module/common.js');
 const url = require('url');
 
-common.getFileMime('.html');
+// common.getFileMime('.html');
 
 http
 	.createServer(function(req, rep) {
@@ -17,13 +17,13 @@ http
 		let extname = path.extname(pathname);
 		// 2.fs来读取文件
 		if (pathname != '/favicon.ico') {
-			fs.readFile('./static' + pathname, (err, data) => {
+			fs.readFile('./static' + pathname, async (err, data) => {
 				if (err) {
 					rep.writeHead(404, { 'Content-Type': 'text/html;charset=utf-8' });
 					rep.end('没有此页面');
 					return;
 				}
-				let mime = common.getMime(extname);
+				let mime = common.getFileMime(extname);
 				rep.writeHead(200, { 'Content-Type': '' + mime + ';charset=utf-8' });
 				rep.end(data);
 			});

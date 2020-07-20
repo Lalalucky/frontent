@@ -14,17 +14,20 @@ exports.getMime = extname => {
 };
 
 exports.getFileMime = extname => {
-	fs.readFile('./data/mime.json', (err, data) => {
-		if (err) {
-			// throw new Error(err);
-			console.log(err);
-			return false;
-		}
-		// console.log(data.toString());
-		let mimeObj = JSON.parse(data.toString());
-		// console.log(mimeObj);
+	// return new Promise((resolve, reject) => {
+	// 	fs.readFile('./data/mime.json', (err, data) => {
+	// 		if (err) {
+	// 			// throw new Error(err);
+	// 			reject(err);
+	// 			return false;
+	// 		}
+	// 		// console.log(data.toString());
+	// 		let mimeObj = JSON.parse(data.toString());
 
-		console.log('-----');
-		// console.log(mimeObj[extname]);
-	});
+	// 		resolve(mimeObj[extname]);
+	// 	});
+	// });
+	var data = fs.readFileSync('./data/mime.json'); // 同步读取数据
+	let mimeObj = JSON.parse(data.toString());
+	return mimeObj[extname];
 };
