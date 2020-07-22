@@ -8,9 +8,10 @@
 		<link rel="stylesheet" href="css/index.css" />
 	</head>
 	<body>
-		<h2><%= title %></h2>
-		<% list.map(el=>{ %>
-		<li><%= el %></li>
+		<!-- <h2>{{title}}</h2> -->
+		<!-- <div>{{@ container}}</div> -->
+		<% data.map(el=>{ %>
+		<li><%= el.username %></li>
 		<% }) %>
 		<br />
 		<br />
