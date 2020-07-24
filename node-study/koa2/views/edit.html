@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<h2>学员编辑</h2>
+		<br />
+		<form action="/doEditUser" method="post">
+			<input type="hidden" name="id" value="{{@ data._id}}" />
+			<span>用户名</span>
+			<input type="text" name="username" value="{{data.username}}" />
+			<br />
+			<br />
+			<span>年龄</span>
+			<input type="text" name="age" value="{{data.age}}" />
+			<br />
+			<br />
+			<span>性别</span>
+			<input type="text" name="sex" value="{{data.sex}}" />
+			<br />
+			<br />
+			<input type="submit" value="提交" />
+		</form>
+	</body>
+</html>

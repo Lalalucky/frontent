@@ -5,26 +5,47 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Document</title>
-		<link rel="stylesheet" href="css/index.css" />
+		<link r$value="stylesheet" href="css/index.css" />
 	</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			padding: 10% 15%;
+		}
+		ul {
+			display: flex;
+		}
+		ul > li {
+			list-style: none;
+			width: 60px;
+			padding: 10px 15px;
+		}
+		ul > li.opt {
+			cursor: pointer;
+			color: blue;
+		}
+	</style>
 	<body>
 		<!-- <h2>{{title}}</h2> -->
 		<!-- <div>{{@ container}}</div> -->
-		<% data.map(el=>{ %>
-		<li><%= el.username %></li>
-		<% }) %>
+		{{ each data }}
+		<ul>
+			<li>{{ $value.username }}</li>
+			<li>{{ $value.age }}</li>
+			<li>{{ $value.sex }}</li>
+			<li class="opt"><a href="./edit?id={{@ $value._id}}">编辑</a></li>
+			<li class="opt"><a href="./edit?id={{ $value._id}}">删除</a></li>
+		</ul>
+		{{/each}}
 		<br />
 		<br />
 		<br />
 		<br />
-		<form action="/doAdd" method="post">
-			<input type="text" name="name" id="" />
-			<br />
-			<br />
-			<input type="password" name="password" id="" />
-			<br />
-			<br />
-			<input type="submit" value="提交" />
-		</form>
+		<h3>
+			<a href="./add"></a>
+		</h3>
 	</body>
 </html>

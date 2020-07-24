@@ -77,9 +77,52 @@ router.get('/', async ctx => {
 	});
 });
 
+router.get('/add', async ctx => {
+	await ctx.render('add');
+});
+
+router.get('/edit', async ctx => {
+	let _id = ctx.query.id;
+	let data = await DB.find('user', { _id: DB.getObjectID(_id) });
+	// console.log(data);
+	await ctx.render('edit', { data: data[0] });
+});
+
+router.post('/doEditUser', async ctx => {
+	let req = ctx.request.body;
+	const { id, username, age, sex } = req;
+	console.log(username);
+	// 5f1a897f9192f724189494c4
+	let result = await DB.update('user', { _id: DB.getObjectID(id) }, { username, age, sex });
+	// console.log(data);
+	try {
+		if (result.result.ok) {
+			ctx.redirect('/');
+		}
+	} catch (error) {
+		console.log(error);
+		return;
+	}
+	// await ctx.render('edit', { data: data[0] });
+});
+
 router.post('/doAdd', async ctx => {
 	console.log(ctx.request.body);
 	ctx.body = ctx.request.body;
+});
+
+router.post('/doAddUser', async ctx => {
+	let data = ctx.request.body;
+	let result = await DB.insert('user', data);
+	// ctx.body = result;
+	try {
+		if (result.result.ok) {
+			ctx.redirect('/');
+		}
+	} catch (error) {
+		console.log(error);
+		return;
+	}
 });
 
 app.use(router.routes()).use(router.allowedMethods());

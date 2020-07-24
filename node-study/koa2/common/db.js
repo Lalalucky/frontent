@@ -2,6 +2,7 @@
  * DB
  */
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const config = require('./config.js');
 const { dbUrl, dbName } = config;
 
@@ -56,7 +57,56 @@ class Db {
 			});
 		});
 	}
-	insert() {}
+	remove(collectionName, json) {
+		return new Promise((resolve, reject) => {
+			this.connect().then(db => {
+				db.collection(collectionName).removeOne(json, (err, result) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(result);
+					}
+				});
+			});
+		});
+	}
+	update(collectionName, json1, json2) {
+		return new Promise((resolve, reject) => {
+			this.connect().then(db => {
+				db.collection(collectionName).updateOne(
+					json1,
+					{
+						$set: json2
+					},
+					(err, result) => {
+						if (err) {
+							reject(err);
+							console.log(1);
+						} else {
+							resolve(result);
+							console.log(2);
+						}
+					}
+				);
+			});
+		});
+	}
+	insert(collectionName, json) {
+		return new Promise((resolve, reject) => {
+			this.connect().then(db => {
+				db.collection(collectionName).insertOne(json, (err, result) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(result);
+					}
+				});
+			});
+		});
+	}
+	getObjectID(id) {
+		return new ObjectID(id);
+	}
 }
 
 // let myDb = new Db();
