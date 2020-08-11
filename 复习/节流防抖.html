@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<style></style>
+	<body>
+		<div class="wrap">
+			<div id="btn" style="padding:20px;">点我</div>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<video src="./test-again.mp4" id="myVideo" width="400" height="300" controls></video>
+		</div>
+	</body>
+</html>
+<script>
+	/*
+	 * 防抖动是将多次执行变为最后一次执行，节流是将多次执行变成每隔一段时间执行。
+	 */
+	/*
+	  防抖
+	*/
+	// const debounce = (fn, wait) => {
+	// 	let timer;
+	// 	return (...args) => {
+	// 		clearInterval(timer);
+	// 		timer = setTimeout(() => {
+	// 			// debugger;
+	// 			fn(...args);
+	// 		}, wait);
+	// 	};
+	// };
+
+	const debounce = (fn, wait) => {
+		let timer;
+		return (...args) => {
+			clearTimeout(timer) ;
+			timer = setTimeout(() => {
+				
+			}, wait);
+		};
+	};
+
+	const throttle = (fn, wait) => {
+		let timer;
+		return (...args) => {
+			if (timer) return;
+			timer = setTimeout(() => {
+				fn(...args);
+				timer = null;
+			}, wait);
+		};
+	};
+
+	let oBtn = document.querySelector('#btn');
+	oBtn.onclick = debounce(handleClick, 2000);
+	function handleClick() {
+		console.log('-------------------');
+	}
+
+	/*
+	   节流
+	  */
+	const throttle = (fn, wait) => {
+		let timer;
+		return (...args) => {
+			if (timer) return;
+			timer = setTimeout(() => {
+				fn(...args);
+				timer = null;
+			});
+		};
+	};
+
+	let oVideo = document.querySelector('#myVideo');
+
+	let timer;
+	oVideo.onplay = throttle(reportVideoRecord, 1000);
+
+	function reportVideoRecord() {
+		if (interVal) return;
+		interVal = setInterval(() => {
+			console.log('上报+++++++++++++');
+		}, 1000);
+	}
+</script>

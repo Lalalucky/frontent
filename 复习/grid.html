@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>grid</title>
+	</head>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+		.container {
+			width: 1000px;
+			height: 600px;
+			border: 1px solid #666;
+			margin: 0 auto;
+			display: grid;
+			/* justify-content: end; */
+			grid-template-columns: 200px 200px 200px;
+			grid-gap: 10px 10px;
+			grid-auto-flow: row dense;
+			grid-template-areas:
+				'header header header'
+				'main main sidebar'
+				'footer footer footer';
+		}
+		.container > div {
+			text-align: center;
+			font-size: 2rem;
+			border: 1px solid #ececec;
+		}
+		.container > div:nth-child(1) {
+			grid-column-start: 1;
+			grid-column-end: 3;
+		}
+		.container > div:nth-child(2) {
+			grid-column-start: 1;
+			grid-column-end: 3;
+		}
+	</style>
+	<body>
+		<div id="app">
+			<div class="container">
+				<div v-for="(el,index) in len">
+					{{ index+1 }}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	const app = new Vue({
+		el: '#app',
+		data() {
+			return {
+				len: 9
+			};
+		}
+	});
+</script>
