@@ -125,6 +125,21 @@ router.post('/doAddUser', async ctx => {
 	}
 });
 
+router.post('/getIndexBanner', async ctx => {
+	let data = ctx.request.body;
+	console.log('获取banner++++++++++++++++++++++++++');
+	// let result = await DB.insert('user', data);
+	// ctx.body = result;
+	// try {
+	// 	if (result.result.ok) {
+	// 		ctx.redirect('/');
+	// 	}
+	// } catch (error) {
+	// 	console.log(error);
+	// 	return;
+	// }
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000);
+app.listen(4000);
